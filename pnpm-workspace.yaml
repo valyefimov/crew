@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "cli"
+  - "docs"
+
+onlyBuiltDependencies:
+  - esbuild
