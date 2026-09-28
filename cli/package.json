@@ -1,0 +1,43 @@
+{
+  "name": "@vefimov/crew",
+  "version": "0.1.0",
+  "description": "A lightweight local-first workspace for your persistent AI colleagues. Memory, files, Telegram — one command.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Valentyn Yefimov <valentine.efimov@gmail.com>",
+  "homepage": "https://valyefimov.github.io/crew/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valyefimov/crew.git",
+    "directory": "cli"
+  },
+  "bugs": "https://github.com/valyefimov/crew/issues",
+  "keywords": ["ai", "agents", "local-first", "ollama", "llm", "memory", "telegram", "assistant", "self-hosted"],
+  "bin": {
+    "crew": "./dist/crew.js"
+  },
+  "files": ["dist", "README.md"],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/copy-web.mjs",
+    "typecheck": "tsc -p .",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.17",
+    "@hono/node-ws": "^1.3.1",
+    "commander": "^15.0.0",
+    "grammy": "^1.46.0",
+    "hono": "^4.13.13",
+    "open": "^11.0.4",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@crew/channels": "workspace:*",
+    "@crew/core": "workspace:*",
+    "@crew/server": "workspace:*",
+    "tsup": "^8.5.1"
+  }
+}
