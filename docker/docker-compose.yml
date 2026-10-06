@@ -1,0 +1,25 @@
+services:
+  crew:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      CREW_MODEL: qwen2.5:3b
+      # CREW_TELEGRAM_TOKEN: "123456:ABC..."
+    volumes:
+      - crew-data:/data
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama-models:/root/.ollama
+    # First run: docker compose exec ollama ollama pull qwen2.5:3b && docker compose exec ollama ollama pull nomic-embed-text
+
+volumes:
+  crew-data:
+  ollama-models:
