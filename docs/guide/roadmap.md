@@ -1,6 +1,6 @@
 # Roadmap
 
-## v0.1 — MVP ✅
+## v1.0 ✅
 
 - [x] Multiple agents with role and personality
 - [x] Long-term memory per agent (FTS5 + vectors, auto-extraction)
@@ -12,20 +12,20 @@
 - [x] Background task queue
 - [x] English, Russian and Ukrainian UI
 
-## v0.2
+## v1.1
 
 - [ ] Local voice: Whisper.cpp (speech-to-text) + Piper / Kokoro (text-to-speech)
 - [ ] Voice messages in Telegram
 - [ ] Scheduled tasks ("every Friday, write release notes")
 - [ ] Sandboxed command execution (Docker)
 
-## v0.3
+## v1.2
 
 - [ ] Slack
 - [ ] Multiple workspaces / projects
 - [ ] Agents talking to each other
 
-## v1.0
+## v2.0
 
 - [ ] Team mode: several people, shared agents
 - [ ] Marketplace of characters and skills

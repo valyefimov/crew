@@ -169,10 +169,10 @@ pnpm test
 
 ## Roadmap
 
-- [x] **v0.1** — agents, memory, web UI, files, Ollama, CLI, Telegram, background tasks
-- [ ] **v0.2** — local voice (Whisper.cpp + Piper/Kokoro), scheduled tasks, sandboxed commands
-- [ ] **v0.3** — Slack, multiple workspaces, agents talking to each other
-- [ ] **v1.0** — team mode, marketplace of characters and skills, PWA, plugins
+- [x] **v1.0** — agents, memory, web UI, files, Ollama, CLI, Telegram, background tasks
+- [ ] **v1.1** — local voice (Whisper.cpp + Piper/Kokoro), scheduled tasks, sandboxed commands
+- [ ] **v1.2** — Slack, multiple workspaces, agents talking to each other
+- [ ] **v2.0** — team mode, marketplace of characters and skills, PWA, plugins
 
 ## Security
 
