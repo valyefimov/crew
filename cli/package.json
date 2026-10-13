@@ -14,7 +14,7 @@
   "bugs": "https://github.com/valyefimov/crew/issues",
   "keywords": ["ai", "agents", "local-first", "ollama", "llm", "memory", "telegram", "assistant", "self-hosted"],
   "bin": {
-    "crew": "./dist/crew.js"
+    "crew": "dist/crew.js"
   },
   "files": ["dist", "README.md"],
   "engines": {
