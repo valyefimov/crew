@@ -10,3 +10,6 @@ coverage
 docs/.vitepress/cache
 docs/.vitepress/dist
 scripts/.output
+
+# generated from the root README at build time (cli/scripts/copy-readme.mjs)
+cli/README.md
