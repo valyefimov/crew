@@ -1,35 +1,35 @@
 # CLI
 
 ```bash
-npm i -g @vefimov/crew   # або додавай перед командами: npx @vefimov/crew
+npm i -g @vefimov/crew   # або пиши перед командою: npx @vefimov/crew
 ```
 
 ## Сервер
 
-| Команда | |
+| Команда | Що робить |
 | --- | --- |
-| `crew` / `crew start` | Запустити сервер і веб-інтерфейс на `127.0.0.1:3000` |
-| `crew start -p 8080 --host 0.0.0.0` | Свій порт / інтерфейс |
-| `crew start --no-telegram` | Не запускати бота |
-| `crew dev` | Запустити й відкрити браузер |
-| `crew doctor` | Перевірити Node, базу, провайдера й моделі |
+| `crew` або `crew start` | Запускає сервер і веб-інтерфейс на `127.0.0.1:3000`. |
+| `crew start -p 8080 --host 0.0.0.0` | Використовує інший порт чи інтерфейс. |
+| `crew start --no-telegram` | Не запускає бота. |
+| `crew dev` | Запускає Crew і відкриває браузер. |
+| `crew doctor` | Перевіряє Node, базу, провайдера й моделі. |
 
 ## Агенти
 
-| Команда | |
+| Команда | Що робить |
 | --- | --- |
-| `crew agent create <name> [-t шаблон] [-r роль] [--persona] [--prompt] [-m модель] [-a емодзі] [-f тека...] [--rw]` | Створити |
-| `crew agent ls` | Список з кількістю спогадів |
-| `crew agent rm <name>` | Видалити разом із пам'яттю |
-| `crew agent grant <name> <folder> [--rw]` | Відкрити теку |
-| `crew agent export <name> [-o файл]` | Експорт у JSON |
-| `crew agent import <file>` | Імпорт з JSON |
+| `crew agent create <name> [-t шаблон] [-r роль] [--persona] [--prompt] [-m модель] [-a емодзі] [-f тека...] [--rw]` | Створює агента. |
+| `crew agent ls` | Показує агентів і кількість спогадів. |
+| `crew agent rm <name>` | Видаляє агента разом із усією пам'яттю. |
+| `crew agent grant <name> <folder> [--rw]` | Відкриває теку. |
+| `crew agent export <name> [-o файл]` | Експортує в JSON. |
+| `crew agent import <file>` | Імпортує з JSON. |
 
 ## Чат і пам'ять
 
 ```bash
-crew chat Lena                         # інтерактивно; /memory, /exit
-crew chat Lena -m "підсумки стендапу?" # одне повідомлення — зручно для скриптів
+crew chat Lena                         # інтерактивно; усередині працюють /memory і /exit
+crew chat Lena -m "підсумки стендапу?" # одне повідомлення, зручно в скриптах
 crew memory Lena --search "деплой"
 crew memory add Lena "Деплой по четвергах" -t decision
 ```

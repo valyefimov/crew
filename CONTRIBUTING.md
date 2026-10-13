@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping! Crew is small on purpose — please keep it that way.
+Thanks for helping out. Crew is small on purpose, so please keep it that way.
 
 ```bash
 pnpm install
@@ -10,7 +10,7 @@ pnpm typecheck
 pnpm docs:dev
 ```
 
-- Node.js 22.13+ and pnpm 10.
-- Keep dependencies minimal; prefer the standard library.
-- Docs live in `docs/` in three languages (`en` at the root, `ru/`, `uk/`) — update all three when you change behaviour.
-- Open an issue before large changes.
+- You need Node.js 22.13+ and pnpm 10.
+- Keep dependencies to a minimum and prefer the standard library.
+- The docs live in `docs/` in three languages: English at the root, then `ru/` and `uk/`. If you change behavior, update all three.
+- For anything large, open an issue first.

@@ -1,25 +1,25 @@
 # Agents
 
-An agent is a persistent colleague: a name, a role, a personality, optional instructions, and its own memory and folders.
+An agent is a persistent colleague. It has a name, a role, a personality, optional instructions, and its own memory and folders.
 
 | Field | What it does |
 | --- | --- |
-| `name` | Unique, case-insensitive. Used everywhere: `crew chat Lena`, `/use Lena` in Telegram. |
-| `role` | One line, e.g. *Senior backend engineer*. Goes into the system prompt. |
-| `personality` | How they talk and behave. |
-| `systemPrompt` | Extra instructions — what they should help with. |
-| `model` | Optional per-agent model. Empty = the global default. |
+| `name` | Unique and case-insensitive. You use it everywhere: `crew chat Lena`, `/use Lena` in Telegram. |
+| `role` | One line, for example "Senior backend engineer". It goes into the system prompt. |
+| `personality` | How the agent talks and behaves. |
+| `systemPrompt` | Extra instructions about what it should help with. |
+| `model` | An optional model for this agent. Empty means the global default. |
 | `avatar` | Any emoji. |
 
 ## Templates
 
 | Template | Agent |
 | --- | --- |
-| `backend` | 🛠️ Artem — senior backend engineer |
-| `frontend` | 🎨 Lena — frontend developer & designer |
-| `pm` | 📋 Max — product manager |
-| `writer` | ✍️ Sofia — writer & editor |
-| `coach` | 🧭 Oleg — personal coach |
+| `backend` | Artem, a senior backend engineer |
+| `frontend` | Lena, a frontend developer and designer |
+| `pm` | Max, a product manager |
+| `writer` | Sofia, a writer and editor |
+| `coach` | Oleg, a personal coach |
 
 ```bash
 crew agent create Lena --template frontend
@@ -29,22 +29,22 @@ crew agent create Kate --role "Data analyst" --persona "Curious, loves charts" -
 ## How a turn works
 
 1. Crew stores your message.
-2. It recalls the most relevant memories (plus the most important ones) and builds the system prompt.
-3. The model answers, possibly calling tools — `remember`, `recall`, and file tools if folders are shared. Up to 6 tool rounds per turn.
-4. The reply is streamed to every connected client and saved.
+2. It looks up the most relevant memories, adds the most important ones, and builds the system prompt.
+3. The model answers. It may call tools along the way: `remember`, `recall`, and the file tools if a folder is shared. A turn allows up to 6 rounds of tool calls.
+4. The reply streams to every connected client and is saved.
 5. A background job reads the exchange and extracts new long-term memories.
 
-Turns of one agent are serialized, so messages from the web UI, the CLI and Telegram never interleave.
+Turns of one agent run one at a time, so messages from the web UI, the CLI and Telegram don't interleave.
 
 ## Statuses
 
-Agents report what they're doing in real time: `idle`, `thinking`, `working` (running a tool) and `remembering` (extracting memories). The dashboard shows it for the whole crew.
+Agents report what they are doing as it happens: `idle`, `thinking`, `working` (running a tool) and `remembering` (extracting memories). The dashboard shows the whole crew at once.
 
-## Export & import
+## Export and import
 
 ```bash
 crew agent export Lena            # → Lena.crew.json, includes memories
 crew agent import Lena.crew.json
 ```
 
-The same works from the web UI (Profile → Export, New colleague → Import).
+The web UI does the same: Profile has an Export button, and the New colleague dialog has Import.

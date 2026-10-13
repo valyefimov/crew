@@ -1,11 +1,11 @@
 # Telegram
 
-Talk to your crew from your phone.
+You can talk to your crew from your phone.
 
 ## Setup
 
 1. Create a bot with [@BotFather](https://t.me/BotFather) and copy the token.
-2. Give it to Crew — in **Settings → Telegram bot token**, or:
+2. Give the token to Crew, either in Settings (Telegram bot token) or like this:
 
 ```bash
 crew config set telegramToken 123456:ABC-DEF...
@@ -22,13 +22,13 @@ crew config set telegramToken 123456:ABC-DEF...
 
 ## Commands
 
-| Command | |
+| Command | What it does |
 | --- | --- |
-| `/agents` | List colleagues, ▶️ marks the current one |
-| `/use Lena` | Switch who you're talking to |
-| `/memory` | What the current agent remembers |
-| `/forget` | Clear this chat's history (memory stays) |
+| `/agents` | Lists the agents. ▶️ marks the current one. |
+| `/use Lena` | Switches who you're talking to. |
+| `/memory` | Shows what the current agent remembers. |
+| `/forget` | Clears this chat's history. Memory stays. |
 
-You can also address someone inline: `Lena, how does this button look?`
+You can also address an agent inside a message: `Lena, how does this button look?`
 
-Telegram has its own conversation per chat, but **memory is shared** — tell Lena something in Telegram, and she knows it in the web UI too.
+Each Telegram chat has its own conversation history, but memory is shared with the web UI. Tell Lena something in Telegram and she knows it in the browser too.

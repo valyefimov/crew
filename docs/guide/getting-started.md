@@ -1,18 +1,19 @@
 # Getting started
 
-Crew is a single Node.js app. It stores everything in one SQLite file and talks to a local model through [Ollama](https://ollama.com) (or any OpenAI-compatible server).
+Crew is a single Node.js app. It keeps everything in one SQLite file and talks to a model through [Ollama](https://ollama.com) or any OpenAI-compatible server.
 
 ## Requirements
 
-- **Node.js 22.13+** — Crew uses the built-in `node:sqlite`, so there are no native modules to compile.
-- **Ollama** with a chat model and an embedding model:
+You need Node.js 22.13 or newer. Crew uses the built-in `node:sqlite`, so nothing has to be compiled.
+
+You also need Ollama with a chat model and an embedding model:
 
 ```bash
 ollama pull qwen2.5:3b
 ollama pull nomic-embed-text
 ```
 
-Any model with tool calling works. On a laptop `qwen2.5:3b` or `llama3.2:3b` is a good start; with more RAM try `qwen2.5:7b` or `qwen3:8b`.
+Any model that supports tool calling will work. On a laptop, `qwen2.5:3b` or `llama3.2:3b` is a reasonable start. If you have more RAM, try `qwen2.5:7b` or `qwen3:8b`.
 
 ## Run it
 
@@ -20,9 +21,9 @@ Any model with tool calling works. On a laptop `qwen2.5:3b` or `llama3.2:3b` is 
 npx @vefimov/crew
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and create your first colleague.
+Open [http://localhost:3000](http://localhost:3000) and create your first agent.
 
-Or install it globally to get the `crew` command:
+To get the `crew` command, install the package globally:
 
 ```bash
 npm i -g @vefimov/crew
@@ -45,7 +46,7 @@ crew doctor
 
 ## Your first agent
 
-From the web UI: **New colleague → pick a template → Create**.
+In the web UI, click New colleague, pick a template and press Create.
 
 From the terminal:
 
@@ -54,7 +55,7 @@ crew agent create Artem --template backend --folder ~/code/my-api
 crew chat Artem
 ```
 
-Tell Artem something about yourself or your project. Close the chat, open it again tomorrow — he still knows.
+Tell Artem something about yourself or your project. Close the chat and open it again tomorrow. Artem still knows.
 
 ## Docker
 

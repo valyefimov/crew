@@ -1,10 +1,10 @@
 # Memory
 
-Every agent has its own long-term memory. It is what makes a Crew agent a *colleague* rather than a chat window.
+Every agent has its own long-term memory. It is what lets an agent pick a conversation back up after you close the chat.
 
 ## What gets remembered
 
-A memory is a short self-contained statement with a type and an importance from 0 to 1:
+A memory is a short, self-contained statement with a type and an importance from 0 to 1:
 
 | Type | Example |
 | --- | --- |
@@ -12,25 +12,26 @@ A memory is a short self-contained statement with a type and an importance from 
 | `decision` | We decided to keep one SQLite file per workspace |
 | `preference` | Val prefers short answers with code |
 
-Memories are created three ways:
+Memories get created in three ways:
 
-- **By the agent** — it calls the `remember` tool when you tell it something worth keeping.
-- **Automatically** — after each turn a background job asks the model to extract durable facts from the exchange.
-- **By you** — in the Memory tab, with `crew memory add`, or via the API.
+- The agent calls the `remember` tool when you tell it something worth keeping.
+- After each turn, a background job asks the model to pull out durable facts from the exchange.
+- You add them yourself in the Memory tab, with `crew memory add`, or through the API.
 
-Near-duplicates are skipped (cosine similarity ≥ 0.9 with an existing memory).
+If a new memory is nearly identical to an existing one (cosine similarity of 0.9 or more), it is skipped.
 
 ## How recall works
 
-Crew uses hybrid search inside SQLite:
+Search runs inside SQLite and combines two methods:
 
-1. **Full-text** — an FTS5 index with BM25 ranking.
-2. **Vectors** — embeddings from your embedding model (`nomic-embed-text` by default), stored as blobs and compared with cosine similarity.
-3. Both rankings are merged with reciprocal-rank fusion and nudged by importance and recency.
+1. A full-text index (FTS5) ranked with BM25.
+2. Embeddings from your embedding model (`nomic-embed-text` by default), stored as blobs and compared by cosine similarity.
 
-If no embedding model is available, Crew silently falls back to full-text search and backfills embeddings later.
+The two rankings are merged with reciprocal-rank fusion, then adjusted a little for importance and age.
 
-Memories with importance ≥ 0.8 are *core* — they are always in the agent's context.
+If no embedding model is available, Crew falls back to full-text search and fills in the embeddings later.
+
+Memories with an importance of 0.8 or more are treated as core and always go into the agent's context.
 
 ## Inspect and edit
 
@@ -40,8 +41,8 @@ crew memory Lena --search "stack"    # search
 crew memory add Lena "Release is on Friday" --type decision
 ```
 
-In the web UI, open an agent → **Memory**: search, add, and delete memories.
+In the web UI, open an agent and go to Memory to search, add and delete.
 
 ::: tip
-Clearing a chat does not clear memory. That's the point.
+Clearing a chat does not clear memory.
 :::

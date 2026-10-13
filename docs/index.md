@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Crew
   text: Your AI colleagues, at home
-  tagline: A lightweight local-first workspace where persistent AI agents live. They remember everything, work with your files, and chat with you in the browser, the terminal and Telegram. One command to start.
+  tagline: A local-first workspace for AI agents that stick around. Each one remembers what you tell it, can work in folders you share, and answers in the browser, the terminal or Telegram. It starts with one command.
   image:
     src: /logo.svg
     alt: Crew
@@ -17,29 +17,23 @@ hero:
       link: https://github.com/valyefimov/crew
 
 features:
-  - icon: 🏠
-    title: Local-first
-    details: Runs on your machine with Ollama or any OpenAI-compatible server. One SQLite file, no cloud, no telemetry.
-  - icon: 🧠
-    title: Long-term memory
-    details: Every agent remembers facts, decisions and preferences. Hybrid full-text + vector search, all in SQLite.
-  - icon: 🎭
-    title: Real characters
-    details: Give each colleague a name, a role and a personality. Start from templates — backend dev, designer, PM, writer, coach.
-  - icon: 📁
-    title: Works with your files
-    details: Share a folder read-only or read-write. Agents can list, read and write files — and never escape that folder.
-  - icon: ✈️
-    title: Telegram built in
-    details: Paste a bot token and talk to your crew from your phone. Pairing codes keep strangers out.
-  - icon: ⚡
-    title: One command
-    details: "npx @vefimov/crew — and you have a web UI, a CLI, a REST + WebSocket API and a background worker."
+  - title: Runs on your machine
+    details: Uses Ollama or any OpenAI-compatible server and stores everything in one SQLite file. There is no cloud account and no telemetry.
+  - title: Memory that lasts
+    details: Every agent keeps the facts, decisions and preferences from past chats and finds them again with full-text and vector search.
+  - title: Agents with a character
+    details: Give each one a name, a role and a personality, or start from a template such as backend developer, designer, product manager, writer or coach.
+  - title: Your files, your rules
+    details: Share a folder as read-only or read-write. Agents can list, read and write files there, and they can't get out of it.
+  - title: Telegram
+    details: Paste a bot token and pair your chat with a one-time code. Memory is shared with the web UI.
+  - title: One command
+    details: "npx @vefimov/crew starts the web UI, a REST and WebSocket API and a background worker. The same package gives you the crew CLI."
 ---
 
 <div style="max-width: 1152px; margin: 48px auto 0; padding: 0 24px">
 
-## See it in action
+## Demo
 
 <Demo lang="en" />
 

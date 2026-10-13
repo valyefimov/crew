@@ -1,6 +1,6 @@
 {
   "name": "@vefimov/crew",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight local-first workspace for your persistent AI colleagues. Memory, files, Telegram — one command.",
   "type": "module",
   "license": "MIT",

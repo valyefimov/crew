@@ -1,26 +1,26 @@
 # HTTP і WebSocket API
 
-Усе, що робить веб-інтерфейс, іде через цей API — тож Crew можна скриптувати. Базовий URL: `http://localhost:3000/api`.
+Веб-інтерфейс робить усе через цей API, тож Crew можна скриптувати. Базовий URL: `http://localhost:3000/api`.
 
 ## Агенти
 
-| Метод | Шлях | |
+| Метод | Шлях | Що робить |
 | --- | --- | --- |
-| `GET` | `/agents` | Список (з `status`, `memoryCount`, `effectiveModel`) |
-| `POST` | `/agents` | Створити — `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
-| `GET` | `/agents/:id` | За id **або ім'ям** |
-| `PATCH` | `/agents/:id` | Змінити |
-| `DELETE` | `/agents/:id` | Видалити разом із пам'яттю |
-| `GET` | `/agents/:id/export` | Експорт у JSON |
-| `POST` | `/agents/import` | Імпорт з JSON |
+| `GET` | `/agents` | Список агентів з полями `status`, `memoryCount` і `effectiveModel`. |
+| `POST` | `/agents` | Створює агента: `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
+| `GET` | `/agents/:id` | Повертає агента за id або за іменем. |
+| `PATCH` | `/agents/:id` | Змінює агента. |
+| `DELETE` | `/agents/:id` | Видаляє агента разом із пам'яттю. |
+| `GET` | `/agents/:id/export` | Експорт у JSON. |
+| `POST` | `/agents/import` | Імпорт з JSON. |
 
 ## Чат
 
-| Метод | Шлях | |
+| Метод | Шлях | Що робить |
 | --- | --- | --- |
-| `POST` | `/agents/:id/chat` | `{ text }` → підсумкова відповідь (блокуючий) |
-| `GET` | `/agents/:id/messages?channel=web` | Історія |
-| `DELETE` | `/agents/:id/messages` | Очистити веб-чат |
+| `POST` | `/agents/:id/chat` | Приймає `{ text }` і повертає підсумкову відповідь. Блокується, доки відповідь не готова. |
+| `GET` | `/agents/:id/messages?channel=web` | Повертає історію. |
+| `DELETE` | `/agents/:id/messages` | Очищає веб-чат. |
 
 ```bash
 curl -s localhost:3000/api/agents/Lena/chat \
@@ -30,28 +30,28 @@ curl -s localhost:3000/api/agents/Lena/chat \
 
 ## Пам'ять і теки
 
-| Метод | Шлях | |
+| Метод | Шлях | Що робить |
 | --- | --- | --- |
-| `GET` | `/agents/:id/memories?q=` | Список або пошук |
-| `POST` | `/agents/:id/memories` | `{ content, type?, importance? }` |
-| `DELETE` | `/memories/:id` | |
-| `GET` | `/agents/:id/folders` | |
-| `POST` | `/agents/:id/folders` | `{ path, mode: "ro" \| "rw" }` |
-| `DELETE` | `/folders/:id` | |
+| `GET` | `/agents/:id/memories?q=` | Список спогадів або пошук за `q`. |
+| `POST` | `/agents/:id/memories` | Додає спогад: `{ content, type?, importance? }` |
+| `DELETE` | `/memories/:id` | Видаляє спогад. |
+| `GET` | `/agents/:id/folders` | Список відкритих тек. |
+| `POST` | `/agents/:id/folders` | Відкриває теку: `{ path, mode: "ro" \| "rw" }` |
+| `DELETE` | `/folders/:id` | Закриває доступ до теки. |
 
 ## Система
 
 `GET /health`, `GET /status`, `GET /settings`, `PUT /settings`, `GET /templates`, `GET /tasks`.
 
-## WebSocket — `/ws`
+## WebSocket на `/ws`
 
-Надіслати:
+Щоб написати агентові, надішли:
 
 ```json
 { "type": "chat", "agentId": "…", "text": "привіт!" }
 ```
 
-Отримувати потік подій (розсилається всім клієнтам):
+У відповідь іде потік подій, і кожен підключений клієнт отримує їх усі:
 
 ```ts
 { type: "status",  agentId, status: "idle" | "thinking" | "working" | "remembering" }

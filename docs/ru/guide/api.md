@@ -1,26 +1,26 @@
 # HTTP и WebSocket API
 
-Всё, что делает веб-интерфейс, идёт через этот API — так что Crew можно скриптовать. Базовый URL: `http://localhost:3000/api`.
+Веб-интерфейс делает всё через этот API, так что Crew можно скриптовать. Базовый URL: `http://localhost:3000/api`.
 
 ## Агенты
 
-| Метод | Путь | |
+| Метод | Путь | Что делает |
 | --- | --- | --- |
-| `GET` | `/agents` | Список (с `status`, `memoryCount`, `effectiveModel`) |
-| `POST` | `/agents` | Создать — `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
-| `GET` | `/agents/:id` | По id **или имени** |
-| `PATCH` | `/agents/:id` | Изменить |
-| `DELETE` | `/agents/:id` | Удалить вместе с памятью |
-| `GET` | `/agents/:id/export` | Экспорт в JSON |
-| `POST` | `/agents/import` | Импорт из JSON |
+| `GET` | `/agents` | Список агентов с полями `status`, `memoryCount` и `effectiveModel`. |
+| `POST` | `/agents` | Создаёт агента: `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
+| `GET` | `/agents/:id` | Возвращает агента по id или по имени. |
+| `PATCH` | `/agents/:id` | Изменяет агента. |
+| `DELETE` | `/agents/:id` | Удаляет агента вместе с памятью. |
+| `GET` | `/agents/:id/export` | Экспорт в JSON. |
+| `POST` | `/agents/import` | Импорт из JSON. |
 
 ## Чат
 
-| Метод | Путь | |
+| Метод | Путь | Что делает |
 | --- | --- | --- |
-| `POST` | `/agents/:id/chat` | `{ text }` → итоговый ответ (блокирующий) |
-| `GET` | `/agents/:id/messages?channel=web` | История |
-| `DELETE` | `/agents/:id/messages` | Очистить веб-чат |
+| `POST` | `/agents/:id/chat` | Принимает `{ text }` и возвращает итоговый ответ. Блокируется, пока ответ не готов. |
+| `GET` | `/agents/:id/messages?channel=web` | Возвращает историю. |
+| `DELETE` | `/agents/:id/messages` | Очищает веб-чат. |
 
 ```bash
 curl -s localhost:3000/api/agents/Lena/chat \
@@ -30,28 +30,28 @@ curl -s localhost:3000/api/agents/Lena/chat \
 
 ## Память и папки
 
-| Метод | Путь | |
+| Метод | Путь | Что делает |
 | --- | --- | --- |
-| `GET` | `/agents/:id/memories?q=` | Список или поиск |
-| `POST` | `/agents/:id/memories` | `{ content, type?, importance? }` |
-| `DELETE` | `/memories/:id` | |
-| `GET` | `/agents/:id/folders` | |
-| `POST` | `/agents/:id/folders` | `{ path, mode: "ro" \| "rw" }` |
-| `DELETE` | `/folders/:id` | |
+| `GET` | `/agents/:id/memories?q=` | Список воспоминаний или поиск по `q`. |
+| `POST` | `/agents/:id/memories` | Добавляет воспоминание: `{ content, type?, importance? }` |
+| `DELETE` | `/memories/:id` | Удаляет воспоминание. |
+| `GET` | `/agents/:id/folders` | Список открытых папок. |
+| `POST` | `/agents/:id/folders` | Открывает папку: `{ path, mode: "ro" \| "rw" }` |
+| `DELETE` | `/folders/:id` | Закрывает доступ к папке. |
 
 ## Система
 
 `GET /health`, `GET /status`, `GET /settings`, `PUT /settings`, `GET /templates`, `GET /tasks`.
 
-## WebSocket — `/ws`
+## WebSocket на `/ws`
 
-Отправить:
+Чтобы написать агенту, отправь:
 
 ```json
 { "type": "chat", "agentId": "…", "text": "привет!" }
 ```
 
-Получать поток событий (рассылается всем клиентам):
+В ответ идёт поток событий, и каждый подключённый клиент получает их все:
 
 ```ts
 { type: "status",  agentId, status: "idle" | "thinking" | "working" | "remembering" }

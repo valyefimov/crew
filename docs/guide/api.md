@@ -1,26 +1,26 @@
-# HTTP & WebSocket API
+# HTTP and WebSocket API
 
-Everything the web UI does goes through this API, so you can script Crew too. Base URL: `http://localhost:3000/api`.
+The web UI does everything through this API, so you can script Crew with it too. The base URL is `http://localhost:3000/api`.
 
 ## Agents
 
-| Method | Path | |
+| Method | Path | What it does |
 | --- | --- | --- |
-| `GET` | `/agents` | List (with `status`, `memoryCount`, `effectiveModel`) |
-| `POST` | `/agents` | Create — `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
-| `GET` | `/agents/:id` | Get by id **or name** |
-| `PATCH` | `/agents/:id` | Update |
-| `DELETE` | `/agents/:id` | Delete with memory |
-| `GET` | `/agents/:id/export` | Export JSON |
-| `POST` | `/agents/import` | Import JSON |
+| `GET` | `/agents` | Lists agents, with `status`, `memoryCount` and `effectiveModel`. |
+| `POST` | `/agents` | Creates one: `{ name, role?, personality?, systemPrompt?, model?, avatar? }` |
+| `GET` | `/agents/:id` | Gets one by id or by name. |
+| `PATCH` | `/agents/:id` | Updates one. |
+| `DELETE` | `/agents/:id` | Deletes one along with its memory. |
+| `GET` | `/agents/:id/export` | Exports JSON. |
+| `POST` | `/agents/import` | Imports JSON. |
 
 ## Chat
 
-| Method | Path | |
+| Method | Path | What it does |
 | --- | --- | --- |
-| `POST` | `/agents/:id/chat` | `{ text }` → final assistant message (blocking) |
-| `GET` | `/agents/:id/messages?channel=web` | History |
-| `DELETE` | `/agents/:id/messages` | Clear the web chat |
+| `POST` | `/agents/:id/chat` | Takes `{ text }` and returns the final assistant message. It blocks until the reply is done. |
+| `GET` | `/agents/:id/messages?channel=web` | Returns the history. |
+| `DELETE` | `/agents/:id/messages` | Clears the web chat. |
 
 ```bash
 curl -s localhost:3000/api/agents/Lena/chat \
@@ -28,30 +28,30 @@ curl -s localhost:3000/api/agents/Lena/chat \
   -d '{"text":"Write a haiku about SQLite"}' | jq -r .content
 ```
 
-## Memory & folders
+## Memory and folders
 
-| Method | Path | |
+| Method | Path | What it does |
 | --- | --- | --- |
-| `GET` | `/agents/:id/memories?q=` | List or search |
-| `POST` | `/agents/:id/memories` | `{ content, type?, importance? }` |
-| `DELETE` | `/memories/:id` | |
-| `GET` | `/agents/:id/folders` | |
-| `POST` | `/agents/:id/folders` | `{ path, mode: "ro" \| "rw" }` |
-| `DELETE` | `/folders/:id` | |
+| `GET` | `/agents/:id/memories?q=` | Lists memories, or searches them with `q`. |
+| `POST` | `/agents/:id/memories` | Adds one: `{ content, type?, importance? }` |
+| `DELETE` | `/memories/:id` | Deletes one. |
+| `GET` | `/agents/:id/folders` | Lists shared folders. |
+| `POST` | `/agents/:id/folders` | Shares one: `{ path, mode: "ro" \| "rw" }` |
+| `DELETE` | `/folders/:id` | Stops sharing it. |
 
 ## System
 
 `GET /health`, `GET /status`, `GET /settings`, `PUT /settings`, `GET /templates`, `GET /tasks`.
 
-## WebSocket — `/ws`
+## WebSocket at `/ws`
 
-Send:
+To chat, send:
 
 ```json
 { "type": "chat", "agentId": "…", "text": "hi!" }
 ```
 
-Receive a stream of events (broadcast to every client):
+You receive a stream of events, and every connected client gets all of them:
 
 ```ts
 { type: "status",  agentId, status: "idle" | "thinking" | "working" | "remembering" }
